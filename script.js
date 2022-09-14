@@ -7,7 +7,7 @@ const modalBackground = document.getElementById("modal-background");
 
 // variables
 let userText = "";
-let errorCount = 0;
+let errorCount = 5;
 let startTime;
 let questionText = "";
 
@@ -35,12 +35,16 @@ const typeController = (e) => {
 
   // if it is not a valid character like Control/Alt then skip displaying anything
   if (!validLetters.includes(newLetter)) {
+    
     return;
   }
 
   userText += newLetter;
 
   const newLetterCorrect = validate(newLetter);
+  if(!newLetterCorrect){
+    errorCount = errorCount + 1 ;
+  }
 
   if (newLetterCorrect) {
     display.innerHTML += `<span class="green">${newLetter === " " ? "▪" : newLetter}</span>`;
